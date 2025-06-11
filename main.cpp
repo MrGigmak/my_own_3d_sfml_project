@@ -70,11 +70,14 @@ public:
             + center.z * cos(angle));
     };
     void rotateY(float angle) {
+        double rottX = rotX;
         rotY += angle;
+        rotateX(-rottX);
         angle = angle * (M_PI / 180);
         for (int i = 0; i <= 7; i++) {
             positionPoints3d[i] = Vector3f(positionPoints3d[i].x * cos(angle) + positionPoints3d[i].z * sin(angle), positionPoints3d[i].y, -positionPoints3d[i].x * sin(angle) + positionPoints3d[i].z * cos(angle));
         }center = Vector3f(center.x * cos(angle) + center.z * sin(angle), center.y, -center.x * sin(angle) + center.z * cos(angle));
+        rotateX(rottX);
     };
     void rotateZ(float angle) {
         rotZ += angle;
