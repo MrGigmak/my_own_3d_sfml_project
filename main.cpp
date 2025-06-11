@@ -70,11 +70,14 @@ public:
             + center.z * cos(angle));
     };
     void rotateY(float angle) {
+        double rottX = rotX;
         rotY += angle;
+        rotateX(-rottX);
         angle = angle * (M_PI / 180);
         for (int i = 0; i <= 7; i++) {
             positionPoints3d[i] = Vector3f(positionPoints3d[i].x * cos(angle) + positionPoints3d[i].z * sin(angle), positionPoints3d[i].y, -positionPoints3d[i].x * sin(angle) + positionPoints3d[i].z * cos(angle));
         }center = Vector3f(center.x * cos(angle) + center.z * sin(angle), center.y, -center.x * sin(angle) + center.z * cos(angle));
+        rotateX(rottX);
     };
     void rotateZ(float angle) {
         rotZ += angle;
@@ -128,27 +131,34 @@ public:
             return CubeLines;
         }
 };
-const int xqcubes = 10;
-const int zqcubes = 10;
-Cube3d cubes[xqcubes][zqcubes];
+const int xqcubes = 5;
+const int zqcubes = 5;
+const int yqcubes = 5;
+Cube3d cubes[xqcubes][zqcubes][yqcubes];
 void movecubes(Vector3f in) {
     for (int i = 0; i < xqcubes; i++) {
         for (int j= 0; j < zqcubes; j++) {
-            cubes[i][j].movePos3d(in);
+            for (int t = 0; t < yqcubes; t++) {
+                cubes[i][j][t].movePos3d(in);
+            }
         }
     }
 }
 void rotateYcubes(float a) {
     for (int i = 0; i < xqcubes; i++) {
         for (int j = 0; j < zqcubes; j++) {
-            cubes[i][j].rotateY(a);
+            for (int t = 0; t < yqcubes; t++) {
+                cubes[i][j][t].rotateY(a);
+            }
         }
     }
 }
 void rotateXcubes(float a) {
     for (int i = 0; i < xqcubes; i++) {
         for (int j = 0; j < zqcubes; j++) {
-            cubes[i][j].rotateX(a);
+            for (int t = 0; t < yqcubes; t++) {
+                cubes[i][j][t].rotateX(a);
+            }
         }
     }
 }
@@ -156,7 +166,9 @@ void norotatecubes() {
 
     for (int i = 0; i < xqcubes; i++) {
         for (int j = 0; j < zqcubes; j++) {
-            cubes[i][j].setPos3d({ 200.f * i,200,200.f * j });
+            for (int t = 0; t < yqcubes; t++) {
+                cubes[i][j][t].setPos3d({ 200.f * i,200.f * t,200.f * j });
+            }
         }
     }
 }
@@ -169,7 +181,9 @@ int main() {
 
     for (int i = 0; i < xqcubes; i++) {
         for (int j = 0; j < zqcubes; j++) {
-            cubes[i][j].setPos3d({ 200.f * i,200,200.f * j });
+            for (int t = 0; t < zqcubes; t++) {
+                cubes[i][j][t].setPos3d({ 200.f * i,200.f*t,200.f * j });
+            }
         }
     }
         while (window.isOpen())
@@ -194,7 +208,9 @@ int main() {
             window.clear();
             for (int i = 0; i < xqcubes; i++) {
                 for (int j = 0; j < zqcubes; j++) {
-                    window.draw(cubes[i][j].GetObj());
+                    for (int t = 0; t < yqcubes; t++) {
+                        window.draw(cubes[i][j][t].GetObj());
+                    }
                 }
             }
         }
