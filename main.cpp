@@ -162,16 +162,6 @@ void rotateXcubes(float a) {
         }
     }
 }
-void norotatecubes() {
-
-    for (int i = 0; i < xqcubes; i++) {
-        for (int j = 0; j < zqcubes; j++) {
-            for (int t = 0; t < yqcubes; t++) {
-                cubes[i][j][t].setPos3d({ 200.f * i,200.f * t,200.f * j });
-            }
-        }
-    }
-}
 int main() {
     RenderWindow window(VideoMode(sizewin), "SFML works!");
     View view;
@@ -204,7 +194,6 @@ int main() {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))rotateYcubes(-0.1f);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))rotateXcubes(-0.1f);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))rotateXcubes(0.1f);
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LAlt))norotatecubes();
             window.clear();
             for (int i = 0; i < xqcubes; i++) {
                 for (int j = 0; j < zqcubes; j++) {
