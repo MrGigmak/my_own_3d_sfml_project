@@ -131,6 +131,7 @@ public:
             return CubeLines;
         }
 };
+
 const int xqcubes = 5;
 const int zqcubes = 5;
 const int yqcubes = 5;
