@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Запуск",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/MO3SP", 
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            // СВЯЗУЮЩАЯ СТРОКА: Вызывает таск компиляции ДО старта отладки
+            "preLaunchTask": "CMake_Build_Project"
+        }
+    ]
+}
